@@ -1,5 +1,5 @@
 % Surviving Large Unfamiliar Codebases
-% Zander Hill (@_ZPH)
+% Zander Hill
 % July 10, 2014
 
 # A Harrowing Tale of Legacy Apps and Oracle Databases
@@ -82,3 +82,8 @@
 
 - Coinduction guarantees productivity but not termination
 
+# El Fin
+## Zander Hill
+- E: zander@xargs.io
+- G: ZPH
+- T: @_ZPH

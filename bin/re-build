@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+readonly FILENAME=surviving_large_unfamiliar_codebases
+
+(cd ${FILENAME} && \
+  echo ${FILENAME}.md | entr make reveal)
