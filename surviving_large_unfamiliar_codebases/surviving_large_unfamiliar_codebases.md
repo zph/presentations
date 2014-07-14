@@ -16,13 +16,32 @@
 
 ## Where I Work
 
-- Work at a product company on team with 20 Engineers. Around 80 Engineers when including `Ruby/Js, Clojure, .NET, and Ops` teams.
+- Work at a product company on team with 20 Engineers. Around 80 Engineers when including all software development teams.
 
 - We've had our primary website since 1999 (.NET).
 
 - Currently support two primary sites and ~ 10 secondary services.
 
-# Legacy Code
+## 
+![Permanent and Semi-Permanent Datastores](images/databases-at-rentpath.jpg)
+
+## 
+![Languages](images/programming-languages-at-rentpath.jpg)
+
+## 
+![](images/programming-languages-at-rentpath-hopeful.jpg)
+
+<div class="notes">
+- Keep Ruby/Coffeescript for ample supply of coders
+- Haskell for the mission critical stuff
+- Golang for the systems level programming/easy deploy
+- Elixir for our distributed systems that are critical
+- This is not to knock clojure or other languages from prior slide, but in our organization I haven't seen Clojure used for anything that Ruby/JRuby couldn't be doing.
+</div>
+
+##
+![Old Site](images/1999-apartment-guide.jpg)
+
 
 ## We've got history :).
 
@@ -32,58 +51,181 @@
 
 - At least one still on `rails-2.3.x`.
 
-## Proof
+# Legacy Code
 
-![Old Site](images/1999-apartment-guide.jpg)
+## Starts simple as an application with a few routes
 
-## RESPECT
+## Authentication
 
-![](images/ali-g-respect.jpg)
+## Extra Features
+- Background processing
 
-## alt Respect
-![](images/honor-legacy-code.jpg)
+## Painful Features
+- Integrate RPC
+- Parse complex and irregular .XLS uploads
+- Parse irregular XML feeds
 
-## Mess
-![](images/legacy-code-mess.jpg)
+## Add various managers/CEOs
 
-## Layers
+## Changing Business Goals
 
-## 
-![](images/tcp-ip-cat-layers.jpg)
+## Introduce 50 devs
+- Varying backgrounds
+- Various skill levels
+- Various coding patterns
 
-## 
-![](images/osi-network-layer-cats.jpg)
+## Agitate for 5+ yrs
 
-## 
+## Confusing
+![](images/kitten-with-yarn.jpeg)
+
+##
+![](images/train-wreck.jpg)
+
+## How to make things happy?
 ![](images/cat-pile.jpg)
 
-# Remainder
-## What am I calling Large
+##
+![](images/legacy-car.jpg)
 
-- Prelude doesn’t encode uncertainty in the API where it’s possible to do so for partial functions
+## Respect
+![](images/honor-legacy-code.jpg)
 
-- `head :: [a] -> a` — is a damn lie, surpassed in damnation only by statistics and politicians
+# Outline
+##
+- Searching
+- Debugging
+- Communication
+- Testing
 
-- Should be — `head :: [a] -> Maybe a`
+# Searching
 
-## SLOC and costs of system
+## How to search efficiently in codebase
 
-- length cannot and should not exist for a type that has the capability to be coinductive. 
+- [the-silver-searcher](https://github.com/ggreer/the_silver_searcher), [pt](https://github.com/monochromegane/the_platinum_searcher), ack, grep
+- Fast and recursive (some by default, some with proper flags)
 
-- Nuts.
+## Know your ack
+![](images/ack.vim.jpg)
 
-- `length [1..]` -> bottom  — this is gross. We’re betraying new people by leaving stuff like this in Prelude.
+## Search + Edit
+- the-silver-searcher + wrapper tool called [sack](https://github.com/zph/go-sack).
+![](images/sack-example.jpg)
 
-## Discuss Ruby vs. Javascript Code (TDD importance on Js side)
+## Search + Edit
+- To Edit
+![](images/sack-edit.jpg)
 
-- What made head dangerous was the empty list case. There’s another problematic case - codata.
 
-- Coinductive lists are things like: [1..]
+# Debugging
 
-- Coinduction guarantees productivity but not termination
+##
+![](images/99-problems.jpg)
+
+## Pry.gem
+``` ruby
+
+def troublesome_method
+    require 'pry';binding.pry
+    even_more_troublesome_variable_that_blows_up
+end
+```
+
+## pry-remote.gem
+```ruby
+
+def troublesome_method_where_we_cant_see_answer
+    require 'pry';binding.pry_remote
+    even_more_troublesome_variable_that_blows_up
+end
+```
+
+```ruby
+
+$ bundle exec pry-remote
+```
+
+# Communication
+
+## Team + VCS == Sum of Knowledge
+
+## Know who's expert with what
+- Who has 3+ yrs with company?
+- Who knows the multidimensional Oracle DB?
+- Who knows why we chose this routing scheme?
+- Who knows how to navigate social dynamics/politics
+
+## Humans knowledge is important
+- They'll have context that might be lost in commit
+- They might have navigated that issue before
+
+## Go out of your way for people
+
+## When the devs can't speak
+
+## Code Archeology
+- Who here has a shortcut in their editor for git blame?
+- What about a shortcut for opening a Pivotal Story (or other project tracker)?
+- Are your commits tagged with story information?
+
+## Code Archeology
+- Fugitive.vim by @tpope
+![](images/fugitive-git-blame.png)
+
+## Code Archeology
+![](images/fugitive-git-blame-2.png)
+
+# Testing
+## Testing - In a Perfect World
+- Unit (minitest/rspec/jasmine)
+- Integration (cucumber)
+- Smoke tests
+- Human QA team
+
+## Testing - In the Real World
+- Some unit (minitest/rspec/jasmine), sparse Integration
+- Manual smoke test at the end of a change
+- Human QA team
+
+## Coping Strategies
+- Use [VCR](https://github.com/myronmarston/vcr) at app boundary for APIs that you don't control
+![](images/vcr.jpg)
+
+## Coping Strategies
+- Mock carefully, stub even more carefully. 
+- Keep logic in places that can easily be tested
+ - Away from views.
+
+## Stubs
+![](images/stub-demon.jpg)
+
+## Coping Strategies
+- Wrap tests with scaffold tests before changes
+- [Approvals.gem](https://github.com/kytrinyx/approvals)
+  - Possibly disposable, consider in your context.
+
+## Still Exploring
+- Property based testing/generative testing with [Rantly](https://github.com/hayeah/rantly)
+- Ruby [contracts](https://github.com/egonSchiele/contracts.ruby) (a pale version of Haskell function typing)
+
+
+# Closing Thoughts
+## Think about how you write code
+## Write Once; Read Many
+## Write for the Maintenance
+![](images/car-mechanic.jpg)
+
+## Write for the least experienced dev on team
+
+## Write for the Tired Dev
+![](images/exhausted-programmer.jpg)
 
 # El Fin
 ## Zander Hill
-- E: zander@xargs.io
-- G: ZPH
-- T: @_ZPH
+``` ruby
+{
+  email: 'zander@xargs.io',
+  github: 'ZPH',
+  twitter: '@_ZPH',
+}
+```
